@@ -1,24 +1,14 @@
-# To add a new cell, type '# %%'
-# To add a new markdown cell, type '# %% [markdown]'
-# %%
 import pandas as pd
 
 
-# # %%
-# df = pd.read_csv("tempDB.csv")
-# df.head()
-
-
-# %%
 def getDB():
 
     df = pd.read_csv("DB_related/tempDB.csv")
 
-    print(df.head())
+    # print(df.head())
     return df
 
 
-# %%
 class BalanceSearchRequest:
     def __init__(self, userID):
         self.userID = userID
@@ -39,15 +29,14 @@ class MONEY:
 
     def create(self, amount):
         self.amount = amount
-        print("Amount set: {}".format(self.amount))
+        # print("Amount set: {}".format(self.amount))
 
     def update(self, amount):
-        print("Before: {}".format(self.amount))
+        # print("Before: {}".format(self.amount))
         self.amount += amount
-        print("After: {}".format(self.amount))
+        # print("After: {}".format(self.amount))
 
 
-# %%
 class BalanceCheckConnection:
     def __init__(self, BSrequest, money):
         self.BSrequest = BSrequest
@@ -63,7 +52,6 @@ class BalanceCheckConnection:
         self.money.create(amount)
 
 
-# %%
 class ReloadConnection:
     def __init__(self, Rrequest, money):
         self.Rrequest = Rrequest
@@ -81,29 +69,4 @@ class ReloadConnection:
         df[df["UserID"] == userID] = newBalance
         # print(newBalance)
         self.money.update(amount)
-
-
-# %%
-# bcrequest = BalanceSearchRequest("a")
-# rrequest = ReloadRequest("a", 500)
-
-# money = MONEY()
-# bcconnection = BalanceCheckConnection(bcrequest, money)
-
-# bcconnection.getBalance()
-
-# rrconnection = ReloadConnection(rrequest, money)
-
-# rrconnection.reloadBalance()
-
-# rrequest.update(1500)
-
-# rrconnection.reloadBalance()
-
-
-# # %%
-# rrconnection.event()
-
-
-# %%
 
