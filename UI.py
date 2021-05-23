@@ -9,13 +9,13 @@ import tkinter as tk
 
 
 class UIMaker(tk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, master=None, money=0):
         super().__init__(master)
         self.master = master
         self.master.geometry("300x500+100+100")
         self.master.resizable(False,False)
         self.pack()
-        self.money=1000
+        self.money= money
         self.render()
         
 
