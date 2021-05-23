@@ -14,7 +14,8 @@ class Controller:
         self.reloadConnection = connection.ReloadConnection(
             self.reloadRequest, self.money
         )
-        self.InterfacePage = UI.UIMaker(UI.root, self.money)
+        self.InterfacePage = UI.UIMaker(UI.tk.Tk(), self.money)
+        self.InterfacePage.mainloop()
 
     def getBalanceRequest(self):
         self.balanceConnection.event()

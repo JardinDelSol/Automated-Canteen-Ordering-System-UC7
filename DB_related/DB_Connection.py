@@ -11,7 +11,7 @@ df.head()
 
 # %%
 def getDB():
-    df = pd.read_csv("tempDB.csv")
+    df = pd.read_csv("DB_related/tempDB.csv")
     df.head()
     return df
 

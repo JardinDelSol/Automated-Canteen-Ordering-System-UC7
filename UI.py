@@ -44,6 +44,3 @@ class UIMaker(tk.Frame):
         self.render(self)
 
 
-root = tk.Tk()
-InterfacePage = UIMaker(master=root)
-InterfacePage.mainloop()
