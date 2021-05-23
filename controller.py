@@ -1,5 +1,5 @@
 import DB_related.DB_Connection as connection
-import UI
+import interface as UI
 
 
 class Controller:
@@ -8,23 +8,28 @@ class Controller:
         self.money = connection.MONEY()
         self.balanceRequest = connection.BalanceSearchRequest(userID)
         self.reloadRequest = connection.ReloadRequest(userID)
-        self.blanceConnection = connection.BalanceCheckConnection(
+        self.balanceConnection = connection.BalanceCheckConnection(
             self.balanceRequest, self.money
         )
         self.reloadConnection = connection.ReloadConnection(
             self.reloadRequest, self.money
         )
-        self.InterfacePage = UI.UIMaker(self, self.money, UI.tk.Tk())
-        self.InterfacePage.mainloop()
+
+        self.Page=UI.InterfacePage(self, self.money)
+        self.UIMaker=UI.UIMaker(self.Page)
+        self.getBalanceRequest()
+        self.Page.display()
 
     def getBalanceRequest(self):
-        self.blanceConnection.event()
-        # self.InterfacePage.event()
+        self.balanceConnection.event()
+        self.UIMaker.event()
+        self.Page.event()
         # UI 업데이트 된 금액 출력
 
     def getReloadAmount(self, amount):
         self.reloadRequest.update(amount)
         self.reloadConnection.event()
-        # self.InterfacePage.event()
+        self.UIMaker.event()
+        self.Page.event()
         # UI
 

@@ -53,8 +53,8 @@ class BalanceCheckConnection:
 
 
 class ReloadConnection:
-    def __init__(self, Rrequest, money):
-        self.Rrequest = Rrequest
+    def __init__(self, Request, money):
+        self.Request = Request
         self.money = money
 
     def event(self):
@@ -62,8 +62,8 @@ class ReloadConnection:
 
     def reloadBalance(self):
         df = getDB()
-        userID = self.Rrequest.userID
-        amount = self.Rrequest.amount
+        userID = self.Request.userID
+        amount = self.Request.amount
         newBalance = df[df["UserID"] == userID]["Balance"].values[0] + amount
         df.loc[df.UserID == userID, "Balance"] = newBalance
         df.to_csv("DB_related/tempDB.csv")
