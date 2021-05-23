@@ -4,9 +4,8 @@ Spyder Editor
 
 This is a temporary script fil
 """
-
 import tkinter as tk
-
+import controller
 
 class UIMaker(tk.Frame):
     def __init__(self, master=None, money=0):
@@ -16,9 +15,9 @@ class UIMaker(tk.Frame):
         self.master.resizable(False,False)
         self.pack()
         self.money= money
+        self.input = input
         self.render()
         
-
 
     def render(self):
         
@@ -37,11 +36,14 @@ class UIMaker(tk.Frame):
         self.quit.pack(side="bottom")
         
     def enterAmount(self):
-        self.money = int(self.entry.get())
-        self.label.config(text="현재 금액 = "+str(self.money))
-        return self.money
+        self.input = int(self.entry.get())
+        self.label.config(text="충전 금액 = "+str(self.input))
+        controller.getBalanceRequest(input)
 
-        
+    def event(self):
+        self.render(self)
+
+
 root = tk.Tk()
 InterfacePage = UIMaker(master=root)
 InterfacePage.mainloop()
