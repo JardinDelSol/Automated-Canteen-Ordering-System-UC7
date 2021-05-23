@@ -3,7 +3,7 @@ import pandas as pd
 
 def getDB():
 
-    df = pd.read_csv("DB_related/tempDB.csv")
+    df = pd.read_csv("DB_related/tempDB.csv", index_col=0)
 
     # print(df.head())
     return df
@@ -64,9 +64,8 @@ class ReloadConnection:
         df = getDB()
         userID = self.Rrequest.userID
         amount = self.Rrequest.amount
-        # print("userID = {} amount = {}".format(userID, amount))
         newBalance = df[df["UserID"] == userID]["Balance"].values[0] + amount
-        df[df["UserID"] == userID] = newBalance
-        # print(newBalance)
+        df.loc[df.UserID == userID, "Balance"] = newBalance
+        df.to_csv("DB_related/tempDB.csv")
         self.money.update(amount)
 
