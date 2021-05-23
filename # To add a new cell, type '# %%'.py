@@ -4,16 +4,14 @@
 import pandas as pd
 
 
-# # %%
-# df = pd.read_csv("tempDB.csv")
-# df.head()
+# %%
+df = pd.read_csv("tempDB.csv")
+df.head()
 
 
 # %%
 def getDB():
-
-    df = pd.read_csv("DB_related/tempDB.csv")
-
+    df = pd.read_csv("tempDB.csv")
     df.head()
     return df
 
@@ -53,7 +51,7 @@ class BalanceCheckConnection:
         self.BSrequest = BSrequest
         self.money = money
 
-    def event(self):
+    def event():
         self.getBalance()
 
     def getBalance(self):
