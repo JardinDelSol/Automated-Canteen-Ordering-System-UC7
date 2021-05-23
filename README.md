@@ -7,6 +7,8 @@
 
 # 5/16
 - 기본적인 개발환경 설정
+  -  DB의 경우 로컬에서 작업해야하는 특성상 csv 파일 사용한 Data Frame을 DB로 활용
+  -  MongoDB의 활용 가능성 검토
 
 # 5/18
 - [Controller](controller.py)에 대한 논의 및 구현
