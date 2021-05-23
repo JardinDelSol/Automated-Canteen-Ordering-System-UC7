@@ -2,8 +2,7 @@ from controller import *
 
 
 def main():
-    controller = Controller(userID="temp")
-    controller.getBalanceRequest()
+    controller = Controller(userID="a")
     # ----initial money setup
 
 

@@ -14,7 +14,7 @@ def getDB():
 
     df = pd.read_csv("DB_related/tempDB.csv")
 
-    df.head()
+    print(df.head())
     return df
 
 
@@ -84,25 +84,25 @@ class ReloadConnection:
 
 
 # %%
-bcrequest = BalanceSearchRequest("a")
-rrequest = ReloadRequest("a", 500)
+# bcrequest = BalanceSearchRequest("a")
+# rrequest = ReloadRequest("a", 500)
 
-money = MONEY()
-bcconnection = BalanceCheckConnection(bcrequest, money)
+# money = MONEY()
+# bcconnection = BalanceCheckConnection(bcrequest, money)
 
-bcconnection.getBalance()
+# bcconnection.getBalance()
 
-rrconnection = ReloadConnection(rrequest, money)
+# rrconnection = ReloadConnection(rrequest, money)
 
-rrconnection.reloadBalance()
+# rrconnection.reloadBalance()
 
-rrequest.update(1500)
+# rrequest.update(1500)
 
-rrconnection.reloadBalance()
+# rrconnection.reloadBalance()
 
 
-# %%
-rrconnection.event()
+# # %%
+# rrconnection.event()
 
 
 # %%

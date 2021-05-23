@@ -5,23 +5,24 @@ Spyder Editor
 This is a temporary script fil
 """
 import tkinter as tk
-import controller
 
 
 class UIMaker(tk.Frame):
-    def __init__(self, money, master=None):
+    def __init__(self, controller, money, master=None):
         super().__init__(master)
         self.master = master
         self.master.geometry("300x500+100+100")
         self.master.resizable(False, False)
         self.pack()
         self.money = money
-        self.input = input
+        self.controller = controller
+        self.input = 0
         self.render()
 
     def render(self):
 
         self.label = tk.Label(self)
+        self.controller.getBalanceRequest()
         self.label.config(text="현재 금액 = " + str(self.money.amount))
         self.label.pack(side="top")
         self.entry = tk.Entry(self)
@@ -36,9 +37,10 @@ class UIMaker(tk.Frame):
 
     def enterAmount(self):
         self.input = int(self.entry.get())
-        self.label.config(text="충전 금액 = " + str(self.input))
-        controller.getBalanceRequest(input)
+        self.controller.getReloadAmount(self.input)
+        self.label.config(text="충전 금액 = " + str(self.money.amount))
+        
 
     def event(self):
-        self.render(self)
+        self.render()
 

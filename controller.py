@@ -14,17 +14,17 @@ class Controller:
         self.reloadConnection = connection.ReloadConnection(
             self.reloadRequest, self.money
         )
-        self.InterfacePage = UI.UIMaker(UI.tk.Tk(), self.money)
+        self.InterfacePage = UI.UIMaker(self, self.money, UI.tk.Tk())
         self.InterfacePage.mainloop()
 
     def getBalanceRequest(self):
-        self.balanceConnection.event()
-        self.UIMaker.event()
+        self.blanceConnection.event()
+        # self.InterfacePage.event()
         # UI 업데이트 된 금액 출력
 
     def getReloadAmount(self, amount):
         self.reloadRequest.update(amount)
         self.reloadConnection.event()
-        self.UIMaker.event()
+        # self.InterfacePage.event()
         # UI
 
