@@ -20,7 +20,6 @@ class Controller:
         
 
     def getBalanceRequest(self):
-        print("a")
         self.balanceConnection.event()
         self.UIMaker.event()
         self.Page.event()

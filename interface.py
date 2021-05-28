@@ -21,7 +21,7 @@ class InterfacePage(tk.Frame):
         self.label.config(text="현재 금액 = " + str(self.money.amount))
         
         self.inputtext= tk.StringVar()
-        self.inputtext.set("100")
+        self.inputtext.set("0")
         
         self.entry = tk.Entry(self,textvariable=self.inputtext)
         
