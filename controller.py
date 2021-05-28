@@ -18,9 +18,9 @@ class Controller:
         self.Page=UI.InterfacePage(self, self.money)
         self.UIMaker=UI.UIMaker(self.Page)
         
-        self.getBalanceRequest()
 
     def getBalanceRequest(self):
+        print("a")
         self.balanceConnection.event()
         self.UIMaker.event()
         self.Page.event()

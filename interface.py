@@ -5,7 +5,7 @@ Spyder Editor
 This is a temporary script fil
 """
 import tkinter as tk
-
+import re
 
 class InterfacePage(tk.Frame):
     def __init__(self,controller,money):
@@ -15,10 +15,15 @@ class InterfacePage(tk.Frame):
         self.input = 0
         self.money = money
         
+        self.test_flg=0 #테스트용 flg 0이면 정상작동 1이면 테스트용 2이면 아무것도 수행안함
+        
         self.label = tk.Label(self)
         self.label.config(text="현재 금액 = " + str(self.money.amount))
         
-        self.entry = tk.Entry(self)
+        self.inputtext= tk.StringVar()
+        self.inputtext.set("100")
+        
+        self.entry = tk.Entry(self,textvariable=self.inputtext)
         
         self.button = tk.Button(self)
         self.button["text"] = "입력"
@@ -27,13 +32,28 @@ class InterfacePage(tk.Frame):
         self.quit = tk.Button(self, text="QUIT", fg="red", command=self.master.destroy)
         
         self.flg=1
-         
+
+    
+        
     def enterAmount(self):
-        self.input = int(self.entry.get())
+        ##########
+        p=re.compile('[0-9]+')
+        m=p.match(self.entry.get())
+        if m:
+            print("Yes")
+            self.input = int(self.entry.get())
+        else:
+            self.input = 0
+        
         self.label.config(text="충전 금액 = " + str(self.input))
         self.flg=0
-        self.controller.getReloadAmount(self.input)
-    
+        
+        if(self.test_flg==1):
+            print(self.input)
+            self.controller.getReloadAmount(self.input)
+        elif(self.test_flg==0):
+            print(self.input)
+            self.controller.getReloadAmount(self.input)
 
     def display(self):
          while(self.flg):
@@ -42,9 +62,18 @@ class InterfacePage(tk.Frame):
          self.flg=1
          print("OK")
          
-    def event(self):
-        self.display()
-    
+    def start(self):
+        self.controller.getBalanceRequest()
+        
+    def event(self,test_flg=0):
+        if(self.test_flg==0):
+            self.display()
+
+    def test(self,input_text): 
+        self.test_flg=1
+        self.inputtext.set(input_text)
+        self.button.invoke()
+
         
         
 
