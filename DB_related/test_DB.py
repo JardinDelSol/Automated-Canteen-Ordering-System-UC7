@@ -3,10 +3,19 @@ from DB_Connection import *
 
 
 def test_balance_check_connection():
-    df = getDB()
-    for i in range(5):
+    users = ["a", "b", "c", "d", "e"]
+    for i in users:
+        df = getDB()
         money = MONEY()
-        bsr = BalanceSearchRequest(str(i))
+        bsr = BalanceSearchRequest(i)
         bcc = BalanceCheckConnection(bsr, money)
         bcc.event()
-        assert money.amount == df[df["UserID"] == str(i)]["Balance"].values[0]
+        assert money.amount == df[df["UserID"] == i]["Balance"].values[0]
+        before = money.amount
+        reload = 500
+        rr = ReloadRequest(i, reload)
+        rc = ReloadConnection(rr, money)
+        rc.event()
+        df = getDB()
+        assert before + reload == df[df["UserID"] == i]["Balance"].values[0]
+
