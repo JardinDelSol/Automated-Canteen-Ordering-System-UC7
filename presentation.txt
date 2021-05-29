@@ -34,6 +34,7 @@
 
 
 7. 개발 협업방식
+- 최대한 class diagram 따르게 구성
 - interface 부분과 DB_related 부분으로 나누어 각자 개발진행
 - 겹쳐지는 controller 부분은 liveshare을 통해 함께 코드 작성
 - 개발을 시작한 뒤 주 2회 정도의 잦고 짧은 미팅을 통해 진행상황 설명 (agile method 활용)
