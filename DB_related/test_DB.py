@@ -2,7 +2,7 @@
 from DB_Connection import *
 
 
-def test_balance_check_connection():
+def test_most_plausible():
     users = ["a", "b", "c", "d", "e"]
     for i in users:
         df = getDB()
@@ -19,3 +19,6 @@ def test_balance_check_connection():
         df = getDB()
         assert before + reload == df[df["UserID"] == i]["Balance"].values[0]
 
+# 사용자가 없는 사용자인 경우
+
+#
