@@ -1,0 +1,39 @@
+1. UC에 대한 설명
+- 앱에서 사용할 돈을 충전하는 UC이다.
+
+2. Domain Model의 구성
+- 사용자에게 금액을 보여주고 충전받을 금액을 입력받는 Interface 부분이 있고, 이후 컨트롤러에서 전체적인 흐름을 진행
+
+3. Sequence Diagram의 reasoning process
+- 크게 4가지 파트에 있어 고민을 하였다.
+    1.UI Maker의 호출을 Controller가 하는지 BCC가 하는지
+    2. KRR의 호출을 누가 할 것인지
+    3. K:Money의 업데이트를 할 것인지 아니면 BCC를 호출하여 해당 값을 받아올 것인지
+    4. UI Maker의 실행을 Controller가 할 것인지 BCC가 할 것인지
+- BCC의 호출은 controller가 담당하는 것이 더 낮은 connectivity를 보여줄 것이라 판단.
+- RR등도 같은 레벨이므로 모두 컨트롤러가 호출
+- 이후 사용자가 지속적으로 금액을 추가하고 업데이트할 수 있도록 loop 추가
+
+4. 수정사항
+- 모두 컨트롤러가 호출하는 만큼 Pub-sub method를 활용하는 것이 유지보수하는 것에 있어 용의할 것이다.
+
+5. 디버깅 방식
+- Bottom-up integration testing 방법을 활용하. End user가 없기 때문에 단점없는 테스팅 방식이라고 판단.
+
+6. 디버깅 테스트 케이스
+    1. test_DB
+    - 프로그램이 의도한대로 실행되는가
+    - 금액이 의도한 대로 추가되고 저장 되는가
+    - 사용자가 존재하지 않을 경우
+
+    2.test_UI
+    - 사용자가 입력한 값이 제대로 넘겨지는지 테스트
+    - 사용자가 입력한 값이 제대로 돈에 더해지는지 테스트
+    - 실행과정의 loop과 고려하여 testflg를 통해 한번만 실행되도록 하였다.
+    - 실행과정의 gui과 특성 고려하여 테스트 입력을 위한 interface class에 test함수를 추가
+
+
+7. 개발 협업방식
+- interface 부분과 DB_related 부분으로 나누어 각자 개발진행
+- 겹쳐지는 controller 부분은 liveshare을 통해 함께 코드 작성
+- 개발을 시작한 뒤 주 2회 정도의 잦고 짧은 미팅을 통해 진행상황 설명 (agile method 활용)

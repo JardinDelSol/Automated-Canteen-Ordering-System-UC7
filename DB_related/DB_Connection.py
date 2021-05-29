@@ -4,8 +4,6 @@ import pandas as pd
 def getDB():
 
     df = pd.read_csv("DB_related/tempDB.csv", index_col=0)
-
-    # print(df.head())
     return df
 
 
@@ -29,12 +27,9 @@ class MONEY:
 
     def create(self, amount):
         self.amount = amount
-        # print("Amount set: {}".format(self.amount))
 
     def update(self, amount):
-        # print("Before: {}".format(self.amount))
         self.amount += amount
-        # print("After: {}".format(self.amount))
 
 
 class BalanceCheckConnection:
@@ -68,13 +63,3 @@ class ReloadConnection:
         df.loc[df.UserID == userID, "Balance"] = newBalance
         df.to_csv("DB_related/tempDB.csv")
         self.money.update(amount)
-
-
-# def test_balance_check_connection():
-#     df = getDB()
-#     for i in range(5):
-#         money = MONEY()
-#         bsr = BalanceSearchRequest(str(i))
-#         bcc = BalanceCheckConnection(bsr, money)
-#         bcc.event()
-#         assert money.amount == df[df["UserID"] == str(i)]["Balance"].values[0]
