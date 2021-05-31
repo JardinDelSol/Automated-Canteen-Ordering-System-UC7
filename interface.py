@@ -37,7 +37,7 @@ class InterfacePage(tk.Frame):
         
     def enterAmount(self):
         ##########
-        p=re.compile('[0-9]+$')
+        p=re.compile('^[0-9]+$')
         m=p.match(self.entry.get())
         if m:
             print("Yes")
