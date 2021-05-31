@@ -2,7 +2,6 @@ import pandas as pd
 
 
 def getDB():
-
     df = pd.read_csv("DB_related/tempDB.csv", index_col=0)
     return df
 
@@ -41,11 +40,14 @@ class BalanceCheckConnection:
         self.getBalance()
 
     def getBalance(self):
-        df = getDB()
-        userID = self.BSrequest.userID
         try:
-            amount = df[df["UserID"] == userID]["Balance"].values[0]
-            self.money.create(amount)
+            df = getDB()
+            userID = self.BSrequest.userID
+            try:
+                amount = df[df["UserID"] == userID]["Balance"].values[0]
+                self.money.create(amount)
+            except:
+                self.money.create(0)
         except:
             self.money.create(0)
 
@@ -59,13 +61,21 @@ class ReloadConnection:
         self.reloadBalance()
 
     def reloadBalance(self):
-        df = getDB()
-        userID = self.Request.userID
-        amount = self.Request.amount
         try:
-            newBalance = df[df["UserID"] == userID]["Balance"].values[0] + amount
-            df.loc[df.UserID == userID, "Balance"] = newBalance
-            df.to_csv("DB_related/tempDB.csv")
-            self.money.update(amount)
+            df = getDB()
+            userID = self.Request.userID
+            amount = self.Request.amount
+            if amount <= 0:
+                self.money.update(0)
+            else:
+                try:
+                    newBalance = (
+                        df[df["UserID"] == userID]["Balance"].values[0] + amount
+                    )
+                    df.loc[df.UserID == userID, "Balance"] = newBalance
+                    df.to_csv("DB_related/tempDB.csv")
+                    self.money.update(amount)
+                except:
+                    self.money.update(0)
         except:
             self.money.update(0)
